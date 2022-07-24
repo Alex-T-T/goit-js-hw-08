@@ -54,11 +54,8 @@ function checkingLocalStorage() {
     const zero = {};
     const storageData = localStorage.getItem('feedback-form-state') ? JSON.parse(localStorage.getItem('feedback-form-state')) : zero ;
 
-    if (storageData.emailRef) {
+    if (storageData) {
         form.email.value = storageData.emailRef;
-    }
-
-    if (storageData.textRef) {
         form.message.value = storageData.textRef;
     }
 }
