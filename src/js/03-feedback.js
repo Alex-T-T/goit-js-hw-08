@@ -7,11 +7,12 @@ console.log(form);
 
 // ==============================
 
-// checkingLocalStorage();
+checkingLocalStorage();
 
 // ==============================
 
-function findInputInfo () {
+function findInputInfo(event) {
+    event.preventDefault()
     const emailRef = form.email.value
    
     const textRef = form.message.value
@@ -26,23 +27,20 @@ function findInputInfo () {
 
 // ==============================
 
-form.addEventListener('input', throttle(findInputInfo, 500));
+form.addEventListener('input', findInputInfo);
 
 // ==============================
 
-const infoForm = JSON.parse(localStorage.getItem('feedback-form-state'));
-
-// ==============================
-
-const getInfo = (event) => {
+function getInfo (event) {
     event.preventDefault();
-  
+const infoForm = JSON.parse(localStorage.getItem('feedback-form-state'));
 const {emailRef, textRef} = infoForm;
 
     if (emailRef === '' || textRef === '') {
         alert('Додайте дані в порожні поля: email/message');
     } 
-
+    
+    localStorage.removeItem('feedback-form-state');
     console.log(infoForm);
     form.reset();
     return;
@@ -52,18 +50,17 @@ form.addEventListener('submit', getInfo);
 
 // ==============================
 
-// function checkingLocalStorage() {
-//     const zero = {};
-//     const storageData = localStorage.getItem('feedback-form-state') ? JSON.parse(localStorage.getItem('feedback-form-state')) : zero ;
-//     console.log(storageData);
+function checkingLocalStorage() {
+    const zero = {};
+    const storageData = localStorage.getItem('feedback-form-state') ? JSON.parse(localStorage.getItem('feedback-form-state')) : zero ;
 
-//     if (storageData.email) {
-//         form.email.value = storageData.emailRef;
-//     }
+    if (storageData.emailRef) {
+        form.email.value = storageData.emailRef;
+    }
 
-//     if (storageData.message) {
-//         form.message.value = storageData.textRef;
-//     }
-// }
+    if (storageData.textRef) {
+        form.message.value = storageData.textRef;
+    }
+}
 
 
