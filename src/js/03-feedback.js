@@ -51,8 +51,8 @@ form.addEventListener('submit', getInfo);
 // ==============================
 
 function checkingLocalStorage() {
-    const zero = {};
-    const storageData = localStorage.getItem('feedback-form-state') ? JSON.parse(localStorage.getItem('feedback-form-state')) : zero ;
+    
+    const storageData = JSON.parse(localStorage.getItem('feedback-form-state'));
 
     if (storageData) {
         form.email.value = storageData.emailRef;
